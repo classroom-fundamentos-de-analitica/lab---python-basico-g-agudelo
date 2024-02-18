@@ -334,5 +334,3 @@ def pregunta_12():
                 total = int(values.split(":")[1])
                 result[row[0]] = result.get(row[0])+total
     return result
-
-print(pregunta_12())
