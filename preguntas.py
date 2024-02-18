@@ -12,6 +12,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+import csv
 
 def pregunta_01():
     """
@@ -19,9 +20,13 @@ def pregunta_01():
 
     Rta/
     214
-    Funciona el github
+    
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result=0
+        for row in data: result+=int(row[1])
+    return result
 
 
 def pregunta_02():
@@ -39,7 +44,12 @@ def pregunta_02():
     ]
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"A":0,"B":0,"C":0,"D":0,"E":0}
+        for row in data:
+            result[row[0]]=1+result.get(row[0])
+    return list(result.items())
 
 
 def pregunta_03():
@@ -57,7 +67,12 @@ def pregunta_03():
     ]
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"A":0,"B":0,"C":0,"D":0,"E":0}
+        for row in data:
+            result[row[0]]=result.get(row[0]) + int(row[1])
+    return list(result.items())
 
 
 def pregunta_04():
@@ -82,8 +97,12 @@ def pregunta_04():
     ]
 
     """
-    return
-
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"01":0,"02":0,"03":0,"04":0,"05":0,"06":0,"07":0,"08":0,"09":0,"10":0,"11":0,"12":0}
+        for row in data:
+            result[row[2][5:7]]=1+result.get(row[2][5:7])
+    return list(result.items())
 
 def pregunta_05():
     """
@@ -100,7 +119,15 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"A":[],"B":[],"C":[],"D":[],"E":[]}
+        lista=[]
+        for row in data:
+            result[row[0]].append(int(row[1]))
+        for tuple in list(result.items()):
+            lista.append((tuple[0],max(tuple[1]),min(tuple[1])))
+    return lista
 
 
 def pregunta_06():
@@ -125,8 +152,17 @@ def pregunta_06():
     ]
 
     """
-    return
-
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"aaa":[],"bbb":[],"ccc":[],"ddd":[],"eee":[],"fff":[],"ggg":[],"hhh":[],"iii":[],"jjj":[]}
+        lista=[]
+        for row in data:
+            keys=row[4].split(",")
+            for values in keys:
+                result[values[:3]].append(int(values[4:]))
+        for tuple in list(result.items()):
+            lista.append((tuple[0],min(tuple[1]),max(tuple[1])))
+    return lista
 
 def pregunta_07():
     """
@@ -149,7 +185,12 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]}
+        for row in data:
+            result[int(row[:2][1])].append(row[:2][0])
+    return list(result.items())
 
 
 def pregunta_08():
@@ -174,7 +215,14 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]}
+        for row in data:
+            result[int(row[:2][1])].append(row[:2][0])
+        for row in range(10):
+            result[row]=sorted(list(set(result[row])))
+    return list(result.items())
 
 
 def pregunta_09():
@@ -197,7 +245,14 @@ def pregunta_09():
     }
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"aaa":0,"bbb":0,"ccc":0,"ddd":0,"eee":0,"fff":0,"ggg":0,"hhh":0,"iii":0,"jjj":0}
+        for row in data:
+            keys=row[4].split(",")
+            for values in keys:
+                result[values[:3]]=1+result.get(values[:3])
+    return result
 
 
 def pregunta_10():
@@ -258,3 +313,5 @@ def pregunta_12():
 
     """
     return
+
+print(pregunta_09())
