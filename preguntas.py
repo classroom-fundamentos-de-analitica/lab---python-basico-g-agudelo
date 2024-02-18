@@ -270,10 +270,15 @@ def pregunta_10():
         ("E", 2, 3),
         ("E", 3, 3),
     ]
-
+    
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        lista=[]
+        for row in data:
+            lista.append((row[0],len(row[3].split(",")),len(row[4].split(","))))
+    return lista
 
 
 def pregunta_11():
@@ -294,7 +299,15 @@ def pregunta_11():
 
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"a":0,"b":0,"c":0,"d":0,"e":0,"f":0,"g":0}
+        for row in data:
+            values=row[1]
+            keys=row[3].split(",")
+            for item in keys:
+                result[item] = result.get(item)+int(values)
+    return  result
 
 
 def pregunta_12():
@@ -312,6 +325,14 @@ def pregunta_12():
     }
 
     """
-    return
+    with open('data.csv') as csvfile:
+        data = csv.reader(csvfile, delimiter = '\t')
+        result={"A":0,"B":0,"C":0,"D":0,"E":0}
+        total=0
+        for row in data:
+            for values in (row[4].split(",")):
+                total = int(values.split(":")[1])
+                result[row[0]] = result.get(row[0])+total
+    return result
 
-print(pregunta_09())
+print(pregunta_12())
